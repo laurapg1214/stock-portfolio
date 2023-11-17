@@ -1,0 +1,16 @@
+{
+  "name": "react-stock-portfolio",
+  "version": "1.0.0",
+  "description": "Stock portfolio code-along using React; part of Altcademy Full Stack Development bootcamp",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
