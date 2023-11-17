@@ -139,6 +139,49 @@ class Portfolio extends React.Component {
                       <td>{unrealized_gain_loss}</td>
                       <td><button className="btn btn-light btn-sm" onClick={() => this.removeStock(index)}>Remove</button></td>
                     </tr>
+                    <form className="col-12 mt-2 mb-4" onSubmit={this.addNewStock}>
+                      <input 
+                        className="mx-2"
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        // run handleFormChange component method on change
+                        onChange={this.handleFormChange}
+                        // pull value from name field
+                        value={form.name}
+                        required
+                      />
+                      <input 
+                        className="mx-2"
+                        name="shares_owned"
+                        type="text"
+                        placeholder="Shares"
+                        // run handleFormChange component method on change
+                        onChange={this.handleFormChange}
+                        // pull value from shares_owned field
+                        value={form.shares_owned}
+                      />
+                      <input 
+                        className="mx-2"
+                        name="cost_per_share"
+                        type="text"
+                        placeholder="Cost"
+                        // run handleFormChange component method on change
+                        onChange={this.handleFormChange}
+                        // pull value from name field
+                        value={form.cost_per_share}
+                      />
+                      <input 
+                        className="mx-2"
+                        name="market_price"
+                        type="text"
+                        placeholder="Price"
+                        // run handleFormChange component method on change
+                        onChange={this.handleFormChange}
+                        // pull value from name field
+                        value={form.market_price}
+                      />
+                    </form>
                   )
                 })}
               </tbody>
