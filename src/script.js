@@ -2,6 +2,7 @@ class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // set portfolio array states
       portfolio: [
         {
           name: 'Feetbook',
@@ -20,7 +21,7 @@ class Portfolio extends React.Component {
           market_price: 3
         }
       ]
-
+      // set initial form state
       form: [
         {
           name: '',
@@ -30,47 +31,68 @@ class Portfolio extends React.Component {
         }
       ]
     };
-
+    // bind component methods to their objects
     this.removeStock = this.removeStock.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.addNewStock = this.addNewStock.bind(this);
   }
 
+  // write component methods
+
   removeStock(index) {
+    // create shallow copy
     const portfolio = this.state.portfolio.slice(); 
+    // remove one stock from portfolio array
     portfolio.splice(index, 1);
-    
+    // update portfolio state
     this.setState({ portfolio });
   }
 
   handleChange(event, index) {
+    // create shallow copy
     const portfolio = this.state.portfolio.slice();
+    // identify field being edited
     const { name, value } = event.target;
+    // update field with new value
     portfolio[index][name] = value;
+    // update portfolio state
     this.setState({ portfolio });
   }
 
   handleFormChange(event) {
+    // identify field in form being edited
     const { name, value } = event.target;
+    // update field with new value
     form[name] = value;
+    // update form state
     this.setState({ form });
   }
 
   addNewStock(event) {
     // prevent default submit button action
     event.preventDefault();
-    const portfolio = this.state.portfolio.slice(); // create shallow copy
-    
+    // create shallow copy
+    const portfolio = this.state.portfolio.slice(); 
     // add new stock to portfolio array
     portfolio.push(this.state.form);
-
-    this.setState()
-    
+    // update portfolio state, reset form state to empty
+    this.setState({
+      portfolio,
+      form: {
+        name: '',
+        shares_owned: 0,
+        cost_per_share: 0,
+        market_price: 0
+      }
+    });
   }
 
   render() {
-    const { portfolio } = this.state;
+    const { 
+      portfolio,
+      form,
+    } = this.state;
 
     const portfolio_market_value = portfolio.reduce((sum, stock) => stock.shares_owned * stock.market_price + sum, 0);
 
