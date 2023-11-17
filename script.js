@@ -15,6 +15,7 @@ var Portfolio = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Portfolio.__proto__ || Object.getPrototypeOf(Portfolio)).call(this, props));
 
     _this.state = {
+      // set portfolio array states
       portfolio: [{
         name: 'Feetbook',
         shares_owned: 20,
@@ -30,40 +31,91 @@ var Portfolio = function (_React$Component) {
         shares_owned: 100,
         cost_per_share: 20,
         market_price: 3
+      }],
+      // set initial form state
+      form: [{
+        name: '',
+        shares_owned: 0,
+        cost_per_share: 0,
+        market_price: 0
       }]
     };
-
+    // bind component methods to their objects
     _this.removeStock = _this.removeStock.bind(_this);
-    _this.handleChange.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleFormChange = _this.handleFormChange.bind(_this);
+    _this.addNewStock = _this.addNewStock.bind(_this);
     return _this;
   }
+
+  // write component methods
 
   _createClass(Portfolio, [{
     key: 'removeStock',
     value: function removeStock(index) {
+      // create shallow copy
       var portfolio = this.state.portfolio.slice();
+      // remove one stock from portfolio array
       portfolio.splice(index, 1);
-
+      // update portfolio state
       this.setState({ portfolio: portfolio });
     }
   }, {
     key: 'handleChange',
     value: function handleChange(event, index) {
+      // create shallow copy
       var portfolio = this.state.portfolio.slice();
+      // identify field being edited
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
-
+      // update field with new value
 
       portfolio[index][name] = value;
+      // update portfolio state
       this.setState({ portfolio: portfolio });
+    }
+  }, {
+    key: 'handleFormChange',
+    value: function handleFormChange(event) {
+      // identify field in form being edited
+      var _event$target2 = event.target,
+          name = _event$target2.name,
+          value = _event$target2.value;
+      // update field with new value
+
+      form[name] = value;
+      // update form state
+      this.setState({ form: form });
+    }
+  }, {
+    key: 'addNewStock',
+    value: function addNewStock(event) {
+      // prevent default submit button action
+      event.preventDefault();
+      // create shallow copy
+      var portfolio = this.state.portfolio.slice();
+      // add new stock to portfolio array
+      portfolio.push(this.state.form);
+      // update portfolio state, reset form state to empty
+      this.setState({
+        portfolio: portfolio,
+        form: {
+          name: '',
+          shares_owned: 0,
+          cost_per_share: 0,
+          market_price: 0
+        }
+      });
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var portfolio = this.state.portfolio;
+      var _state = this.state,
+          portfolio = _state.portfolio,
+          form = _state.form;
 
 
       var portfolio_market_value = portfolio.reduce(function (sum, stock) {
@@ -198,6 +250,56 @@ var Portfolio = function (_React$Component) {
                   );
                 })
               )
+            )
+          ),
+          React.createElement(
+            'form',
+            { className: 'col-12 mt-2 mb-4', onSubmit: this.addNewStock },
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'name',
+              type: 'text',
+              placeholder: 'Name'
+              // run handleFormChange component method on change
+              , onChange: this.handleFormChange
+              // pull value from name field
+              , value: form.name,
+              required: true
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'shares_owned',
+              type: 'number',
+              placeholder: 'Shares'
+              // run handleFormChange component method on change
+              , onChange: this.handleFormChange
+              // pull value from shares_owned field
+              , value: form.shares_owned
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'cost_per_share',
+              type: 'number',
+              placeholder: 'Cost'
+              // run handleFormChange component method on change
+              , onChange: this.handleFormChange
+              // pull value from name field
+              , value: form.cost_per_share
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'market_price',
+              type: 'number',
+              placeholder: 'Price'
+              // run handleFormChange component method on change
+              , onChange: this.handleFormChange
+              // pull value from name field
+              , value: form.market_price
+            }),
+            React.createElement(
+              'button',
+              { className: 'btn btn-success btn-sm' },
+              'Add'
             )
           ),
           React.createElement(
