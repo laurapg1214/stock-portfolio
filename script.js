@@ -82,6 +82,9 @@ var Portfolio = function (_React$Component) {
       var _event$target2 = event.target,
           name = _event$target2.name,
           value = _event$target2.value;
+      // update form with this new state
+
+      var form = this.state.form;
       // update field with new value
 
       form[name] = value;

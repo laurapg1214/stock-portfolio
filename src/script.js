@@ -63,6 +63,8 @@ class Portfolio extends React.Component {
   handleFormChange(event) {
     // identify field in form being edited
     const { name, value } = event.target;
+    // update form with this new state
+    const { form } = this.state;
     // update field with new value
     form[name] = value;
     // update form state
